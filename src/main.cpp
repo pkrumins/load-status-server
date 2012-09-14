@@ -180,6 +180,7 @@ format_response(
 
     free(mem_usage);
     free(disk_usage);
+    free(cpu_usage);
 
     return response;
 }
