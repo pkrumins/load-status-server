@@ -160,14 +160,13 @@ format_response(
         "\"memory\": {\n"
         "%s\n"
         "},\n"
-        "{\n"
         "\"cpu\": {\n"
         "%s\n"
         "},\n"
-        "{\n"
         "\"disk\": {\n"
         "%s\n"
-        "},\n";
+        "}\n"
+        "}\n";
 
     int response_size = (
         strlen(response_format) +
