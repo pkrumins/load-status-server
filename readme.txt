@@ -3,7 +3,20 @@ default any when you connect to this port it sends you JSON string with
 CPU, Disk, and Memory usage. Useful if you want to monitor how servers
 are doing.
 
+Compile it with Visual Studio or mingw. It uses just Win32 calls.
+
+It's compiled as console application by default. If you want it to be
+a native win32 app compile it with WINAPP defined.
+
 Example:
+
+    One your windows server at server.com run the program:
+
+    C:\bin\> load-status-server.exe
+    Started server on port 7000
+
+    Now if you connect to server.com:7000, it will send you JSON with
+    the current server load info:
 
     $ nc server.com 7000
     {
@@ -17,15 +30,14 @@ Example:
         "free_virtual": 2130919424,
         "free_extended_virtual": 0
     },
-    {
     "cpu": {
         "load": 5
     },
-    {
     "disk": {
         "free_user": 22858027008,
         "free_total": 22858027008,
         "total": 42947571712
+    }
     }
 
 Field descriptions:
