@@ -103,15 +103,19 @@ format_response(
 {
     char mem_usage_format[] =
         "    \"usage\": %d,\n"
-        "    \"total_physical\": %llu,\n"
-        "    \"free_physical\": %llu,\n"
-        "    \"total_paging_file\": %llu,\n"
-        "    \"free_paging_file\": %llu,\n"
-        "    \"total_virtual\": %llu,\n"
-        "    \"free_virtual\": %llu,\n"
-        "    \"free_extended_virtual\": %llu";
+        "    \"total_physical\": %lld,\n"
+        "    \"free_physical\": %lld,\n"
+        "    \"total_paging_file\": %lld,\n"
+        "    \"free_paging_file\": %lld,\n"
+        "    \"total_virtual\": %lld,\n"
+        "    \"free_virtual\": %lld,\n"
+        "    \"free_extended_virtual\": %lld";
 
-    int mem_usage_len = strlen(mem_usage_format)*2;
+    int mem_usage_len = strlen(mem_usage_format) +
+        7*20 /* 20 = max length of %lld */ +
+        10 /* 10 = max length of %d */ +
+        1;
+
     char *mem_usage = (char *)malloc(sizeof(char)*mem_usage_len);
     if (!mem_usage) {
         printf("Failed allocating memory for mem_usage\n");
@@ -128,11 +132,12 @@ format_response(
         mem_info.free_extended_virtual);
 
     char disk_usage_format[] =
-        "    \"free_user\": %llu,\n"
-        "    \"free_total\": %llu,\n"
-        "    \"total\": %llu";
+        "    \"free_user\": %lld,\n"
+        "    \"free_total\": %lld,\n"
+        "    \"total\": %lld";
 
-    int disk_usage_len = strlen(disk_usage_format)*2;
+    int disk_usage_len = strlen(disk_usage_format) +
+        3*20 /* 20 = max length of %lld */ + 1;
     char *disk_usage = (char *)malloc(sizeof(char)*disk_usage_len);
     if (!disk_usage) {
         printf("Failed allocating memory for disk_usage\n");
@@ -146,7 +151,8 @@ format_response(
     char cpu_usage_format[] =
         "    \"load\": %d";
 
-    int cpu_usage_len = strlen(cpu_usage_format)*2;
+    int cpu_usage_len = strlen(cpu_usage_format) + 
+        10 /* max length of %d */ + 1;
     char *cpu_usage = (char *)malloc(sizeof(char)*cpu_usage_len);
     if (!cpu_usage) {
         printf("Failed allocating memory for cpu_usage\n");
