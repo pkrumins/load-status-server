@@ -174,12 +174,10 @@ format_response(
         "}\n"
         "}\n";
 
-    int response_size = (
-        strlen(response_format) +
-        strlen(mem_usage_format) +
-        strlen(disk_usage_format) +
-        strlen(cpu_usage_format)
-    ) * 2;
+    int response_size = strlen(response_format) +
+        strlen(mem_usage) +
+        strlen(disk_usage) +
+        strlen(cpu_usage);
     char *response = (char *)malloc(response_size);
     sprintf_s(response, response_size-1, response_format, mem_usage, cpu_usage, disk_usage);
 
